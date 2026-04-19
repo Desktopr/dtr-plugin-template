@@ -1,0 +1,7 @@
+{
+  "name": "dtr-plugin-template",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {}
+}
