@@ -7,7 +7,7 @@ const { spawn } = require("child_process");
 
 const args = process.argv.slice(2);
 if (args.length < 1) {
-  console.error("❌ Please provide a directory name (e.g. math)");
+  console.error("❌ Please provide a directory name (e.g. npm run build module-template)");
   process.exit(1);
 }
 

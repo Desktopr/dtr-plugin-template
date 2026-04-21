@@ -9,7 +9,7 @@ pub fn dispatch(op: &str, args: &Value) -> Result<Value, String> {
     match op {
         "ping" => ping(args),
 
-        "sum" => eg_sum(args),       // this is from function_examples.rs, you can remove this
+        "divide" => eg_divide(args),  // this is from function_examples.rs, you can remove this
         "greet" => eg_greet(args),   // this is from function_examples.rs, you can remove this
 
         /* ============================
