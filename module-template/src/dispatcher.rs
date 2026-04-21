@@ -18,6 +18,8 @@ pub fn dispatch(op: &str, args: &Value) -> Result<Value, String> {
 
             e.g. "yourFunctionName" => your_function(args),
 
+            NOTE: the function will be exposed as "yourFunctionName" not as "your_function"
+
         ============================ */
 
         _ => Err(format!("unknown function: {}", op)),
