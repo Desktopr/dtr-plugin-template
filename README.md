@@ -1,4 +1,4 @@
-# Desktopr Plugin Template (WASM)
+# Desktopr wasm-module-template
 
 📦 **Template repository** to create **WebAssembly (WASI)** modules compatible with [Desktopr](https://desktopr.app).
 
@@ -132,9 +132,9 @@ dist/math.wasm
 
 ## Develop a Plugin
 
-1. Download the [`dtr-plugin-template`](https://github.com/Desktopr/dtr-plugin-template) repo from:
+1. Download the [`dtr-wasm-module-template`](https//:wasm-module-template.desktopr.app) repo from:
     ```url
-    https://github.com/Desktopr/dtr-plugin-template
+    https//:wasm-module-template.desktopr.app
     ```
 
 1. Copy the `module-template` folder with a new name:

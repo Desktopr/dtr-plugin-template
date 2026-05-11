@@ -1,7 +1,8 @@
 {
-  "name": "dtr-plugin-template",
+  "name": "dtr-wasm-modules",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "build:module": "npm run build 'module'"
   },
   "devDependencies": {}
 }
