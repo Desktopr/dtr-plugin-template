@@ -3,7 +3,7 @@ use serde_json::{Value, json};
 use std::fs;
 
 
-// olugin fs examples
+// plugin fs examples
 
 pub fn eg_storage_write(args: &Value) -> Result<Value, String> {
     let path = args
@@ -15,6 +15,12 @@ pub fn eg_storage_write(args: &Value) -> Result<Value, String> {
         .get("contents")
         .and_then(|x| x.as_str())
         .unwrap_or("Hello from Desktopr plugin storage");
+
+    if let Some(parent) = std::path::Path::new(path).parent() {
+        if !parent.as_os_str().is_empty() {
+            fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+        }
+    }
 
     fs::write(path, contents).map_err(|e| e.to_string())?;
 
