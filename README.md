@@ -6,9 +6,8 @@ Desktopr’s **Plugins** provide a secure, sandboxed, and flexible runtime for e
 
 Plugins let developers extend an app with custom native-side logic, local file processing, data utilities, conversions, validation, computations, and other advanced features without rebuilding the whole app.
 
-:::tip BRIDGE API PLUGINS MODULE
-Desktopr plugins are managed and called via the [plugins module](https://desktopr.app/guide/bridge/api/plugins.md) of the Desktopr bridge API.
-:::
+> **BRIDGE API PLUGINS MODULE** <br>
+> Desktopr plugins are managed and called via the [plugins module](https://desktopr.app/guide/bridge/api/plugins.md) of the Desktopr bridge > API.
 
 ## Overview
 
@@ -25,9 +24,8 @@ The runtime provides:
 - **Automatic timeout handling**
 - **Cross-platform consistency on macOS, Windows, and Linux**
 
-:::details NON-RUST BASED WASM
-**This guide shows examples and implementations using Rust**, but you can use any language as long as you build a wasm32-wasip1 WASI so that can be execute it with Wasmtime and respects the structure and runtime contract.
-:::
+> **NON-RUST BASED WASM** <br>
+> **This guide shows examples and implementations using Rust**, but you can use any language as long as you build a wasm32-wasip1 WASI so > that can be execute it with Wasmtime and respects the structure and runtime contract.
 
 ## Architecture
 
@@ -120,11 +118,12 @@ In Desktopr plugins:
 - the plugin must write the final JSON response to **`stdout`**
 - debug logs may be written to **`stderr`**
 
-:::warning
-The final plugin result must always be written to `stdout`.
+> **WARNING**
+>
+> The final plugin result must always be written to `stdout`.
+>
+> Do not use `stderr` for the final result.
 
-Do not use `stderr` for the final result.
-:::
 
 ### Input received by the plugin
 
@@ -186,11 +185,10 @@ Example Desktopr plugin call response:
 }
 ```
 
-:::tip MANDATORY FORMAT
-The plugin must follow the JSON input/output protocol described above.
-
-Invalid, malformed, non-JSON, or noisy `stdout` output may cause the call result to fail or be parsed incorrectly.
-:::
+> **MANDATORY FORMAT** <br>
+> The plugin must follow the JSON input/output protocol described above.
+> 
+> Invalid, malformed, non-JSON, or noisy `stdout` output may cause the call result to fail or be parsed incorrectly.
 
 ## Logging with `stderr`
 
@@ -207,7 +205,7 @@ let _ = std::io::stderr().write_all(b"log message 2\n");
 
 Example output:
 
-```json
+```ts
 {
 //   "id": "plugin_req2",
 //   "ok": true,
@@ -377,17 +375,16 @@ The runtime provides:
 
 WASM modules are validated before execution and must start with the standard `\0asm` magic bytes.
 
-:::warning
-Avoid infinite loops or blocking operations inside your WASM module. Long-running executions may be interrupted by the runtime timeout.
-:::
+> **WARNING** <br>
+> Avoid infinite loops or blocking operations inside your WASM module. Long-running executions may be interrupted by the runtime timeout.
 
 ## WASM Plugin Structure
 
 Each plugin is an independent WASM module compiled for the `wasm32-wasip1` target and executed as a WASI-compatible program.
 
-:::tip Rust-based examples
-This guide shows examples and implementations using **Rust**.
-:::
+> **Rust-based examples** <br>
+> This guide shows examples and implementations using **Rust**.
+
 
 Example structure:
 
@@ -490,15 +487,15 @@ pub fn dispatch(op: &str, args: &Value) -> Result<Value, String> {
 }
 ```
 
-:::warning DISPATCHER CONTRACT
-Do not rename `pub fn dispatch` or change its signature:
+> **DISPATCHER CONTRACT** <br>
+> Do not rename `pub fn dispatch` or change its signature:
+> 
+> ```rs
+> pub fn dispatch(op: &str, args: &Value) -> Result<Value, String>
+> ```
+> 
+> Desktopr’s plugin template runtime expects this dispatcher function to exist.
 
-```rs
-pub fn dispatch(op: &str, args: &Value) -> Result<Value, String>
-```
-
-Desktopr’s plugin template runtime expects this dispatcher function to exist.
-:::
 
 ## Template Runtime Files
 
@@ -556,13 +553,13 @@ Desktopr uses WASM plugins to run local, isolated, cross-platform logic inside t
 
 ## Notes
 
-:::tip DEVELOPMENT NOTES
-- Keep functions deterministic where possible.
-- Do not use network access; it is blocked by the runtime.
-- Use relative filesystem paths for persistent plugin files.
-- Do not print extra output to `stdout`.
-- The final JSON response must be printed to `stdout`.
-- Use `stderr` only for debug logs and diagnostics.
-- Large outputs should be written to plugin storage, not to `stdout` or `stderr`.
-- All modules must follow the JSON input/output protocol documented above.
-:::
+> **DEVELOPMENT NOTES** <br>
+> - Keep functions deterministic where possible.
+> - Do not use network access; it is blocked by the runtime.
+> - Use relative filesystem paths for persistent plugin files.
+> - Do not print extra output to `stdout`.
+> - The final JSON response must be printed to `stdout`.
+> - Use `stderr` only for debug logs and diagnostics.
+> - Large outputs should be written to plugin storage, not to `stdout` or `stderr`.
+> - All modules must follow the JSON input/output protocol documented above.
+
