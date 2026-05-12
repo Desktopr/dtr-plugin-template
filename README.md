@@ -2,7 +2,7 @@
 
 📦 **Template repository** to create **WebAssembly (WASI)** modules compatible with [Desktopr](https://desktopr.app).
 
-This repo contains the basic structure to develop, test, and build `.wasm` modules to be used inside the **Desktopr sandbox** (`bd_sandbox_call`).
+This repo contains the basic structure to develop, test, and build `.wasm` modules to be used inside the **Desktopr sandbox** (`dtr_sandbox_call`).
 
 
 Desktopr’s **Plugins** provides a secure, sandboxed and flexible runtime for executing [WebAssembly (WASM)](https://webassembly.org/) plugins within the desktop wrapper.  
