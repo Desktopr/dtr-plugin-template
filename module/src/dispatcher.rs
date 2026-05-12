@@ -1,27 +1,39 @@
+/* ============================
+   DISPATCHER
+   - Do not rename `pub fn dispatch` or change its signature.
+   - Desktopr's plugin runtime uses this function to route calls from the `fn` input field.
+   - Only edit the `match op` block to register your plugin functions.
+============================ */
 
-use serde_json::{Value, json};
-use crate::function_examples::*; // just for reference/examples
+use serde_json::{Value, json}; // required
 use crate::functions::*;
 
-/// Dispatcher: map "fn" field to functions name.
-/// Add your custom functions in this match.
+use crate::function_examples::*; // just for reference/examples (can be removed)
+
+
 pub fn dispatch(op: &str, args: &Value) -> Result<Value, String> {
     match op {
-        "ping" => ping(args),
+        
+        /*================== EXAMPLE FUNCTIONS ==================*/
+        /*============== you can remove this block ==============*/
+        /*=======================================================*/
+        /*===*/                                             /*===*/
+        /*===*/ "ping" => ping(args),                       /*===*/
+        /*===*/ "dividePos" => eg_divide_positional(args),  /*===*/
+        /*===*/ "divide" => eg_divide(args),                /*===*/
+        /*===*/ "greet" => eg_greet(args),                  /*===*/
+        /*===*/ "write" => eg_storage_write(args),          /*===*/
+        /*===*/ "read" => eg_storage_read(args)             /*===*/
+        /*===*/                                             /*===*/
+        /*=======================================================*/
+        /*============== you can remove this block ==============*/
+        /*=======================================================*/
 
-        "dividePos" => eg_divide_positional(args),       // this is from function_examples.rs, you can remove this
-        "divide" => eg_divide(args),       // this is from function_examples.rs, you can remove this
-        "greet" => eg_greet(args),   // this is from function_examples.rs, you can remove this
-        "write" => eg_storage_write(args),   // this is from function_examples.rs, you can remove this
-        "read" => eg_storage_read(args),   // this is from function_examples.rs, you can remove this
 
-        /* ============================
+        // ADD HERE YOUR ACTUAL FUNCTIONS
 
-            ADD HERE YOUR FUNCTIONS
+        // e.g. "yourFunctionName" => your_function(args),
 
-            e.g. "yourFunctionName" => your_function(args),
-
-        ============================ */
 
         _ => Err(format!("unknown function: {}", op)),
     }

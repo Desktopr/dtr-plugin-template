@@ -1,9 +1,14 @@
-// This file contains example methods that you can use for reference
+/* ============================
+   FUNCTIONS EXAMPLES
+   - This file only contains example methods that you can use for reference.
+   - You can delete this and remove the import in `dispatcher.rs`.
+============================ */
+
 use serde_json::{Value, json};
 use std::fs;
 
 
-// plugin fs examples
+// FS EXAMPLES:
 
 pub fn eg_storage_write(args: &Value) -> Result<Value, String> {
     let path = args
@@ -47,7 +52,7 @@ pub fn eg_storage_read(args: &Value) -> Result<Value, String> {
 }
 
 
-// math examples
+// MATH EXAMPLES:
 
 // named arguments examples (eg. { "a": 16, "b": 2 }):
 pub fn eg_divide(args: &Value) -> Result<Value, String> {
@@ -81,3 +86,23 @@ pub fn eg_divide_positional(args: &Value) -> Result<Value, String> {
 
     Ok(json!(a / b))
 }
+
+
+/* ============================
+    LOGGING WITH `stderr`
+    - `stderr` is reserved for debug logs and diagnostic messages.
+    - Anything written to `stderr` is captured by Desktopr and returned
+        in the plugin call response under the `stderr` field.
+    - Do not use `stderr` for the final result; print the JSON response to `stdout`.
+
+    EXAMPLE
+    - In your plugin code:
+        let _ = std::io::stderr().write_all(b"log message 1\n");
+        let _ = std::io::stderr().write_all(b"log message 2\n");
+
+    - Output:
+        {
+            ...,
+            "stderr": "log message 1\nlog message 2\n"
+        }
+============================ */
